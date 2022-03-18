@@ -13,6 +13,12 @@ namespace GuessingNumberGame
     public partial class Form1 : Form
     {
 
+        Random rnd = new Random();
+
+        int guessTotal = 0;
+
+        int mySecretNumber;
+
         public Form1()
         {
             InitializeComponent();
@@ -22,43 +28,70 @@ namespace GuessingNumberGame
         {
             this.Close();
         }
-        private void btnStartReplay_Click(object sender, EventArgs e)
-        {
-            Random rnd = new Random();
-        }
 
         private void btnGuess_Click(object sender, EventArgs e)
         {
-            int mySecreteNumber = rnd.Next(10) + 1;
+            //after everytime we take a guess it comes back to the box
+            txtBoxGuess.Focus();
 
-            int guess = 0;
+            int userGuess = 0;
 
-            int guessAmount = 0;
-        
             try
             {
-                if (mySecreteNumber > guess)
+                if (int.TryParse(txtBoxGuess.Text, out userGuess))
                 {
-                    guessAmount++;
-                    lblHint.Text = "Higher";
-                }
-                else if (mySecreteNumber < guess)
-                {
-                    guessAmount++;
-                        
-                    lblHint.Text = "Lower";
-                }
-                else
-                {
-                    lblHint.Text = "CORRECT!!!";
-
+                    if (userGuess > 0 || userGuess < 100)
+                    {
+                        {
+                            MessageBox.Show("Invalid Info. Please put in a number between 1-100.");
+                        }
+                    }
+                    else
+                    {
+                        if (mySecretNumber > userGuess)
+                        {
+                            guessTotal++;
+                            lblGeusses.Text = guessTotal.ToString();
+                            lblHint.Text = "Higher";
+                        }
+                        else if (mySecretNumber < userGuess)
+                        {
+                            guessTotal++;
+                            lblGeusses.Text = guessTotal.ToString();
+                            lblHint.Text = "Lower";
+                        }
+                        else
+                        {
+                            guessTotal++;
+                            lblGeusses.Text = guessTotal.ToString();
+                            lblHint.Text = "CORRECT!!!";
+                            btnReplay.Visible = true;
+                            btnGuess.Visible = false;
+                        }
+                    }
                 }
             }
             catch
             {
-            
+
             }
+            txtBoxGuess.Text = "" ;
         }
 
+        private void bntReplay_Click(object sender, EventArgs e)
+        {
+            Random rnd = new Random();
+            guessTotal = guessTotal - guessTotal;
+            mySecretNumber = rnd.Next(100) + 1;
+            btnReplay.Visible = false;
+            btnGuess.Visible = true;
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            mySecretNumber = rnd.Next(100) + 1;
+            btnReplay.Visible = false;
+            btnGuess.Visible = true;
+        }
     }
 }
