@@ -52,19 +52,19 @@ namespace GuessingNumberGame
                         {
                             guessTotal++;
                             lblGeusses.Text = guessTotal.ToString();
-                            lblHint.Text = "Higher";
+                            lblHint.Text = "Higher ↑";
                         }
                         else if (mySecretNumber < userGuess)
                         {
                             guessTotal++;
                             lblGeusses.Text = guessTotal.ToString();
-                            lblHint.Text = "Lower";
+                            lblHint.Text = "Lower ↓";
                         }
                         else
                         {
                             guessTotal++;
                             lblGeusses.Text = guessTotal.ToString();
-                            lblHint.Text = "CORRECT!!!";
+                            lblHint.Text = "CORRECT!☻!☻!";
                             btnReplay.Visible = true;
                             btnGuess.Visible = false;
                         }
