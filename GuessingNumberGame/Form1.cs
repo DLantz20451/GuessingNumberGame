@@ -40,7 +40,7 @@ namespace GuessingNumberGame
             {
                 if (int.TryParse(txtBoxGuess.Text, out userGuess))
                 {
-                    if (userGuess > 0 || userGuess < 100)
+                    if (userGuess < 0 || userGuess > 101)
                     {
                         {
                             MessageBox.Show("Invalid Info. Please put in a number between 1-100.");
